@@ -4,11 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Start from './screens/Start';
 import AllActivities from './screens/AllActivities';
 import SpecialActivities from './screens/SpecialActivities';
+import AddActivity from './screens/AddActivity';
 import { ActivityProvider } from './components/ActivityContent';
 import colors from './constants/Colors';
 
@@ -33,7 +33,7 @@ export default function App() {
         tabBarInactiveTintColor: 'gray',
     });
 
-    const Main = () => (
+    const Activities = () => (
         <Tab.Navigator>
             <Tab.Screen 
                 name="All Activities" 
@@ -53,10 +53,16 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator>
                     {isAuthenticated ? (
-                        <Stack.Screen 
-                            name="Main" 
-                            component={Main} 
-                            options={{headerShown: false}}/>
+                        <>
+                            <Stack.Screen 
+                                name="Main" 
+                                component={Activities} 
+                                options={{headerShown: false}}/>
+                            <Stack.Screen
+                                name="AddActivity"
+                                component={AddActivity}
+                                options={{ title: 'Add An Activity' }}/>
+                        </>   
                     ) : (
                         <Stack.Screen 
                             name="Start" 
