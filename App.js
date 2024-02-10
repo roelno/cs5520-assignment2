@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Start from './screens/Start';
 import AllActivities from './screens/AllActivities';
 import SpecialActivities from './screens/SpecialActivities';
+import { ActivityProvider } from './components/ActivityContent';
 import colors from './constants/Colors';
 
 
@@ -48,22 +49,24 @@ export default function App() {
     );
     
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                {isAuthenticated ? (
-                    <Stack.Screen 
-                        name="Main" 
-                        component={Main} 
-                        options={{headerShown: false}}/>
-                ) : (
-                    <Stack.Screen 
-                        name="Start" 
-                        component={Start} 
-                        initialParams={{ authenticationHandler: authenticationHandler }}
-                        options={{ headerShown: false }}/>
-                )}
-            </Stack.Navigator>
-        </NavigationContainer>
+        <ActivityProvider>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    {isAuthenticated ? (
+                        <Stack.Screen 
+                            name="Main" 
+                            component={Main} 
+                            options={{headerShown: false}}/>
+                    ) : (
+                        <Stack.Screen 
+                            name="Start" 
+                            component={Start} 
+                            initialParams={{ authenticationHandler: authenticationHandler }}
+                            options={{ headerShown: false }}/>
+                    )}
+                </Stack.Navigator>
+            </NavigationContainer>
+        </ActivityProvider>
     );
 }
 
