@@ -1,10 +1,21 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
+import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 
-const SpecialActivities = () => {
+const SpecialActivities = ({navigation}) => {
     const { activities } = useActivities();
     const specialActivities = activities.filter(activity => activity.isSpecial);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button
+                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'Special...' })}
+                    title="Add"
+                />
+            ),
+        });
+    }, [navigation]);
 
     return (
         <View>

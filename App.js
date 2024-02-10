@@ -55,13 +55,15 @@ export default function App() {
                     {isAuthenticated ? (
                         <>
                             <Stack.Screen 
-                                name="Main" 
+                                name="Activities" 
                                 component={Activities} 
                                 options={{headerShown: false}}/>
                             <Stack.Screen
                                 name="AddActivity"
                                 component={AddActivity}
-                                options={{ title: 'Add An Activity' }}/>
+                                options={({ route }) => ({
+                                    title: route.params?.screenTitle || 'Add An Activity'
+                                })}/>
                         </>   
                     ) : (
                         <Stack.Screen 

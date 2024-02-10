@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, FlatList,Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 
@@ -9,7 +10,7 @@ const AllActivities = ({ navigation }) => {
         navigation.setOptions({
             headerRight: () => (
                 <Button
-                    onPress={() => navigation.navigate('AddActivity')}
+                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities' })}
                     title="Add"
                 />
             ),

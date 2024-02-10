@@ -1,7 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 
-const AddActivity = ({ navigation }) => {
+const AddActivity = ({ navigation, route }) => {
+
+    useEffect(() => {
+        const previousScreenTitle = route.params?.screenTitle || 'Activities';
+        navigation.setOptions({
+            title: `Add An Activity`,
+            headerBackTitle: previousScreenTitle,  // Used in iOS to set the back button title
+        });
+    }, [navigation, route.params?.screenTitle]);
+
+
     return (
         <View>
         <Text>Add an Activity</Text>
