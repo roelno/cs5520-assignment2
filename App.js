@@ -5,9 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { FontAwesome5 } from '@expo/vector-icons';
 import Start from './screens/Start';
 import AllActivities from './screens/AllActivities';
 import SpecialActivities from './screens/SpecialActivities';
+import colors from './constants/Colors';
+
 
 
 const Stack = createStackNavigator();
@@ -21,14 +24,29 @@ export default function App() {
         setIsAuthenticated(validation);
     }
 
+    const screenOptions = (iconName) => ({
+        tabBarIcon: ({ focused, color, size }) => (
+            <FontAwesome5 name={iconName} size={size} color={focused ? colors.primary : 'gray'} />
+        ),
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: 'gray',
+    });
 
     const Main = () => (
         <Tab.Navigator>
-            <Tab.Screen name="All Activities" component={AllActivities} />
-            <Tab.Screen name="Special Activities" component={SpecialActivities} />
+            <Tab.Screen 
+                name="All Activities" 
+                component={AllActivities}
+                options={screenOptions('running')}
+            />
+            <Tab.Screen 
+                name="Special Activities" 
+                component={SpecialActivities} 
+                options={screenOptions('tired')}
+            />
         </Tab.Navigator>
     );
-
+    
     return (
         <NavigationContainer>
             <Stack.Navigator>
