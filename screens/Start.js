@@ -28,21 +28,27 @@ const Start = ({route}) => {
     }
 
     const isStartEnable = email.length > 0 || phoneNumber.length > 0;
-    const isAuthenticated = isValidEmail(email) && isValidPhoneNumber(phoneNumber);
 
     const onConfirm = () => {
+        let isValid = true;
+
         if (!isValidEmail(email)) {
             setEmailError('Please enter a valid email address');
+            isValid = false;
         } else {
             setEmailError('');
         }
 
         if (!isValidPhoneNumber(phoneNumber)) {
             setPhoneNumberError('Please enter a valid phone number');
+            isValid = false;
         } else {
             setPhoneNumberError('');
         }
-        authenticationHandler(isAuthenticated);
+
+        if (isValid) {
+            authenticationHandler(true);
+        }
     }
 
     return (
