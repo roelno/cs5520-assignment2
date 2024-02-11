@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Platform, ScrollView} from 'react-native'
+import { StyleSheet, Text, View, TextInput, Platform, ScrollView, Alert} from 'react-native'
 import React, {useContext, useEffect, useState} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -133,7 +133,20 @@ const AddActivity = ({ navigation, route }) => {
                 />
                 <CustomButton
                     title='Confirm'
-                    onPress={() => validateActivity() ? navigation.goBack() : alert('Invalid Input') }
+                    onPress={() => {
+                        const isValid = validateActivity();
+                        if (!isValid) {
+                            Alert.alert(
+                                "Invalid Input", // Title
+                                "Please ensure all fields are filled correctly", // Message
+                                [
+                                    { text: "OK" } // Array of buttons
+                                ]
+                            );
+                        } else {
+                            navigation.goBack();
+                        }
+                    }}
                     isEnabled={true}
                 />
             </View> 
@@ -146,9 +159,7 @@ export default AddActivity
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
+        flex: 1,
         padding: 20,
         backgroundColor: colors.background,
     },
