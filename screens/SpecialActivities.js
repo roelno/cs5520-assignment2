@@ -4,7 +4,7 @@ import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import CustomButton from '../components/CustomButton';
 import { StatusBar } from 'expo-status-bar';
-import ActivityCard from '../components/ActivityCard';
+import ActivityCard from '../components/ActivitiesList';
 
 const SpecialActivities = ({navigation}) => {
     const { activities } = useActivities();
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     buttonText: {
-        color: colors.primaryText, // Adjust this color to match your navigation title
-        fontSize: 18, // This is a common title size, but adjust as needed
-        fontWeight: 'bold', // Most navigation titles are bold
+        color: colors.primaryText, 
+        fontSize: 18, 
+        fontWeight: 'bold', 
     },
 })

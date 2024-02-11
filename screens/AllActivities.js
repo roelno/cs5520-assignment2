@@ -5,7 +5,7 @@ import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
 import CustomButton from '../components/CustomButton';
-import ActivityCard from '../components/ActivityCard';
+import ActivityCard from '../components/ActivitiesList';
 
 const AllActivities = ({ navigation }) => {
     const { activities } = useActivities();

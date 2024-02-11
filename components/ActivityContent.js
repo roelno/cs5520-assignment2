@@ -26,5 +26,4 @@ export const ActivityProvider = ({ children }) => {
     );
 };
 
-// Export the context to be used by other components
 export const useActivities = () => React.useContext(ActivityContext);

@@ -112,7 +112,7 @@ const AddActivity = ({ navigation, route }) => {
                 style={styles.input}
                 placeholder="Select Date"
                 value={date.toDateString()}
-                onFocus={ () => setDatePickerVisibility(true) } // Show the date picker when the input is focused
+                onPressIn={ () => setDatePickerVisibility(true) } // Show the date picker when the input is focused
                 showSoftInputOnFocus={false} // Prevent keyboard from showing
             />
             {isDatePickerVisible && (
