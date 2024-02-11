@@ -26,13 +26,21 @@ export default function App() {
     }
 
     const screenOptions = (iconName) => ({
+        tabBarLabelStyle: { fontSize: 13, marginTop: 1, marginBottom: 5},
         tabBarIcon: ({ focused, color, size }) => (
-            <FontAwesome5 name={iconName} size={size} color={focused ? colors.primary : 'gray'} />
+            <View style={{ marginBottom: -3 }}>
+                <FontAwesome5 name={iconName} size={size} color={focused ? colors.primary : 'gray'} />
+            </View>
         ),
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: colors.gray,
         headerTitleStyle: { color: colors.white },
         headerStyle: { backgroundColor: colors.primary},
+        tabBarStyle: {
+            height: 70,
+            paddingTop: 5, 
+            paddingBottom: 5, 
+        },
     });
 
     const Activities = () => (
