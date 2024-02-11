@@ -18,20 +18,21 @@ const TextInputField = ({ value, onChangeText, keyboardType, errorMessage }) => 
 
 const styles = StyleSheet.create({
     inputContainer: {
-        marginBottom: 15,
+        marginBottom: 10,
     },
     input: {
         height: 40,
-        // textAlign: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: colors.secondary,
-        // color: colors.secondary,
-        // width: 240,
+        marginTop: 12,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        padding: 10,
     },
     errorText: {
-        // color: colors.error,
+        color: colors.error,
         fontSize: 12,
-        marginTop: 3,
+        marginTop: 5,
     },
 });
 

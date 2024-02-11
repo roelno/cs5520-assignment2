@@ -52,7 +52,7 @@ const Start = ({route}) => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.hint}>Email Address</Text>
             <TextInputField
                 value={email}
@@ -90,21 +90,20 @@ const Start = ({route}) => {
 export default Start
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 20,
+    },
     hint: {
         fontSize: 20,
         fontWeight: 'bold',
         color: colors.primary,
         marginTop: 20,
     },
-    input: {
-        borderBottomWidth: 2,
-        borderBottomColor: 'purple',
-        // width: "50%"
-    },
-    buttonContainer: { 
+    buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '60%',
         marginTop: 10
       },
 })

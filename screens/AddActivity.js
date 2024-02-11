@@ -107,7 +107,7 @@ const AddActivity = ({ navigation, route }) => {
             />
 
             <Text style={styles.hint}>Date *</Text>
-            {/* When the user taps on this TextInput, the date picker will be shown */}
+            
             <TextInput
                 style={styles.input}
                 placeholder="Select Date"
