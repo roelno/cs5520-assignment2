@@ -67,6 +67,9 @@ const AddActivity = ({ navigation, route }) => {
         <View style={styles.container}>
 
             <Text style={styles.hint}>Activity *</Text>
+            <View style={{marginTop:5, marginBottom: 20, zIndex: 5000}}>   
+                {/* zIndex is used to ensure the dropdown is displayed on top of other components */}
+            
             <DropDownPicker
                 open={open}
                 value={activityType}
@@ -81,6 +84,7 @@ const AddActivity = ({ navigation, route }) => {
                 ]}
                 setOpen={setOpen}
                 setValue={setActivityType}
+                placeholder="Select an activity"
                 defaultValue={activityType}
                 containerStyle={{ height: 40, zIndex: 5000 }} 
                 style={{ borderColor: colors.primary}}
@@ -96,6 +100,7 @@ const AddActivity = ({ navigation, route }) => {
                 zIndex={5000} 
                 listMode="SCROLLVIEW"
             />
+            </View>
 
             <Text style={styles.hint}>Duration (min) *</Text>
             <TextInput
@@ -107,7 +112,6 @@ const AddActivity = ({ navigation, route }) => {
             />
 
             <Text style={styles.hint}>Date *</Text>
-            
             <TextInput
                 style={styles.input}
                 placeholder="Select Date"
@@ -165,6 +169,7 @@ const styles = StyleSheet.create({
     },
     hint: {
         marginTop: 20,
+        fontSize: 18,
     },
     input: {
         height: 40,
@@ -174,12 +179,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 8,
         padding: 10,
-        width: '100%',
     },
     buttonContainer: { 
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '60%',
         marginTop: 10
       },
 })
