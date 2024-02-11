@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
+import colors from '../constants/Colors';
+import { StatusBar } from 'expo-status-bar';
+import CustomButton from '../components/CustomButton';
 
 const AllActivities = ({ navigation }) => {
     const { activities } = useActivities();
@@ -9,16 +12,24 @@ const AllActivities = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Button
+                <CustomButton
                     onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities' })}
                     title="Add"
+                    isEnabled={true}
+                    styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
+                    textStyleOverride={{
+                        color: colors.secondary,
+                        fontSize: 18, 
+                        fontWeight: 'bold', 
+                    }}
                 />
             ),
         });
     }, [navigation]);
 
     return (
-        <View>
+        <View style={styles.container}>
+            <StatusBar style="auto" />
             <FlatList
                 data={activities}
                 keyExtractor={(item) => item.id.toString()}
@@ -32,4 +43,10 @@ const AllActivities = ({ navigation }) => {
 
 export default AllActivities
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.background,
+        padding: 20,
+    },
+})

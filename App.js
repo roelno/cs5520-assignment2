@@ -31,6 +31,8 @@ export default function App() {
         ),
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: 'gray',
+        headerTitleStyle: { color: colors.white },
+        headerStyle: { backgroundColor: colors.primary},
     });
 
     const Activities = () => (
@@ -62,7 +64,9 @@ export default function App() {
                                 name="AddActivity"
                                 component={AddActivity}
                                 options={({ route }) => ({
-                                    title: route.params?.screenTitle || 'Add An Activity'
+                                    title: route.params?.screenTitle || 'Add An Activity',
+                                    headerStyle: { backgroundColor: colors.primary },
+                                    headerTintColor: colors.white,
                                 })}/>
                         </>   
                     ) : (
@@ -70,7 +74,7 @@ export default function App() {
                             name="Start" 
                             component={Start} 
                             initialParams={{ authenticationHandler: authenticationHandler }}
-                            options={{ headerShown: false }}/>
+                            options={{ headerShown: false}}/>
                     )}
                 </Stack.Navigator>
             </NavigationContainer>

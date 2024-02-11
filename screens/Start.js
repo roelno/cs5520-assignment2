@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import React, {useState} from 'react'
 import TextInputField from '../components/TextInput'
@@ -52,7 +53,9 @@ const Start = ({route}) => {
     }
 
     return (
+        
         <View style={styles.container}>
+            <StatusBar style="auto" />
             <Text style={styles.hint}>Email Address</Text>
             <TextInputField
                 value={email}
@@ -94,6 +97,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 20,
+        backgroundColor: colors.background,
     },
     hint: {
         fontSize: 20,

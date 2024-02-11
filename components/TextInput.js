@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
         borderWidth: 1,
         borderColor: colors.primary,
-        backgroundColor: '#fff',
+        backgroundColor: colors.inputfiled,
         borderRadius: 8,
         padding: 10,
     },
