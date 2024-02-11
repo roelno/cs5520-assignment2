@@ -5,6 +5,7 @@ import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
 import CustomButton from '../components/CustomButton';
+import ActivityCard from '../components/ActivityCard';
 
 const AllActivities = ({ navigation }) => {
     const { activities } = useActivities();
@@ -34,7 +35,7 @@ const AllActivities = ({ navigation }) => {
                 data={activities}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Text>{item.type} - Duration: {item.duration} mins {item.isSpecial ? '(Special)' : ''}</Text>
+                    <ActivityCard item={item} />
                 )}
             />
         </View>
@@ -49,4 +50,5 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         padding: 20,
     },
+    
 })
