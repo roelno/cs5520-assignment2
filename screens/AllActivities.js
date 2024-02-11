@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native';
+import { StyleSheet, View, FlatList } from 'react-native'
 import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';

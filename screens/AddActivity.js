@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TextInput, Platform, ScrollView, Alert} from 'react-native'
-import React, {useContext, useEffect, useState} from 'react'
+import { StyleSheet, Text, View, TextInput, Alert} from 'react-native'
+import React, {useEffect, useState} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../constants/Colors';

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, {useState} from 'react'
 import TextInputField from '../components/TextInput'
 import CustomButton from '../components/CustomButton'

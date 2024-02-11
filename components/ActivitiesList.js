@@ -7,7 +7,7 @@ const ActivityCard = ({item}) => {
         <View style={styles.activityContainer}>
             <Text style={styles.activityType}>{item.type}</Text>
             {item.isSpecial 
-                ? <Image source={require('../constants/special1.png')} style={{ width: 22, height: 22 }} />
+                ? <Image source={require('../constants/special.png')} style={{ width: 22, height: 22 }} />
                 : <View style={{ width: 22, height: 22 }} />}
             <View style={styles.activityInfo}>
                 <Text style={styles.infoText}>{new Date(item.date).toDateString()}</Text>
