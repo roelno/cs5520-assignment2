@@ -1,21 +1,24 @@
 import { StyleSheet, Text, View, TextInput, Platform, ScrollView} from 'react-native'
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../constants/Colors';
+import CustomButton from '../components/CustomButton';
+import { useActivities } from '../components/ActivityContent'
 
 const AddActivity = ({ navigation, route }) => {
     const [activityType, setActivityType] = useState(null);
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-
     const [duration, setDuration] = useState('');
-
     const [date, setDate] = useState(new Date());
+
+    // State for DropDownPicker and DateTimePicker visibility
+    const [open, setOpen] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    
+    // Access addActivity function from the context
+    const {addActivity} = useActivities();
 
-
-    // Set the headerBackTitle
+    // // Set the navigation options
     useEffect(() => {
         const previousScreenTitle = route.params?.screenTitle || 'Activities';
         navigation.setOptions({
@@ -32,6 +35,33 @@ const AddActivity = ({ navigation, route }) => {
         setDatePickerVisibility(false);  // after pick the date, close it
     };
 
+    // Validate the activity data
+    const validateActivity = () => {
+        const durationNumber = parseFloat(duration);
+
+        if (!activityType || !duration || !date) {
+            return false;
+        }
+
+        if (isNaN(duration)) {
+            return false;
+        }
+    
+        if (duration <= 0) {
+            return false;
+        }
+
+        const newActivity = {
+            id: Math.random().toString(),
+            type: activityType,
+            duration: durationNumber,
+            date: date.toISOString(), // Store date as ISO string format
+        };
+        addActivity(newActivity);
+        return true;
+    }
+
+
 
     return (
         <View style={styles.container}>
@@ -39,20 +69,18 @@ const AddActivity = ({ navigation, route }) => {
             <Text style={styles.hint}>Activity *</Text>
             <DropDownPicker
                 open={open}
-                value={value}
+                value={activityType}
                 items={[
                     {label: 'Walking', value: 'Walking'},
-                    {label: 'Running', value: 'running'},
-                    {label: 'Swimming', value: 'swimming'},
+                    {label: 'Running', value: 'Running'},
+                    {label: 'Swimming', value: 'Swimming'},
                     {label: 'Weights', value: 'Weights'},
                     {label: 'Yoga', value: 'Yoga'},
                     {label: 'Cycling', value: 'Cycling'},
                     {label: 'Hiking', value: 'Hiking'},
                 ]}
                 setOpen={setOpen}
-                setValue={setValue}
-                
-             
+                setValue={setActivityType}
                 defaultValue={activityType}
                 containerStyle={{ height: 40, zIndex: 5000 }} 
                 style={{ borderColor: colors.primary}}
@@ -97,6 +125,19 @@ const AddActivity = ({ navigation, route }) => {
                 />
             )}
 
+            <View style={styles.buttonContainer}>
+                <CustomButton
+                    title='Cancel'
+                    onPress={() => navigation.goBack()}
+                    isEnabled={true}
+                />
+                <CustomButton
+                    title='Confirm'
+                    onPress={() => validateActivity() ? navigation.goBack() : alert('Invalid Input') }
+                    isEnabled={true}
+                />
+            </View> 
+
         </View>
     )
 }
@@ -123,4 +164,10 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '100%',
     },
+    buttonContainer: { 
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '60%',
+        marginTop: 10
+      },
 })
