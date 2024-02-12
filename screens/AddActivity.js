@@ -9,7 +9,7 @@ import { useActivities } from '../components/ActivityContent'
 const AddActivity = ({ navigation, route }) => {
     const [activityType, setActivityType] = useState(null);
     const [duration, setDuration] = useState('');
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(null);
 
     // State for DropDownPicker and DateTimePicker visibility
     const [open, setOpen] = useState(false);
@@ -115,14 +115,19 @@ const AddActivity = ({ navigation, route }) => {
             <TextInput
                 style={styles.input}
                 placeholder="Select Date"
-                value={date.toDateString()}
-                onPressIn={ () => setDatePickerVisibility(true) } // Show the date picker when the input is focused
+                value={date ? date.toDateString() : ''}
+                onPressIn={ () => {
+                    if (!date) {
+                        setDate(new Date()); // Set date to current date if it's null
+                    };
+                    setDatePickerVisibility(prevState => !prevState) } // Show the date picker when the input is focused
+                }
                 showSoftInputOnFocus={false} // Prevent keyboard from showing
             />
             {isDatePickerVisible && (
                 <DateTimePicker
                     testID="dateTimePicker"
-                    value={date}
+                    value={date || new Date()}
                     mode="date"
                     display='inline' // Inline for both Android and iOS
                     onChange={onDateChange}
