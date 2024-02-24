@@ -5,6 +5,7 @@ import colors from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
 import PressableButton from '../components/PressableComponent';
 import ActivityCard from '../components/ActivitiesList';
+import { Entypo } from '@expo/vector-icons';
 
 const AllActivities = ({ navigation }) => {
     const { activities } = useActivities();
@@ -13,8 +14,7 @@ const AllActivities = ({ navigation }) => {
         navigation.setOptions({
             headerRight: () => (
                 <PressableButton
-                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities' })}
-                    title="Add"
+                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities...' })}
                     isEnabled={true}
                     styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
                     textStyleOverride={{
@@ -22,7 +22,10 @@ const AllActivities = ({ navigation }) => {
                         fontSize: 18, 
                         fontWeight: 'bold', 
                     }}
-                />
+                >
+                    <Entypo name="plus" size={24} color="white" />
+                </PressableButton>
+
             ),
         });
     }, [navigation]);

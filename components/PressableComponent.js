@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, View } from 'react-native';
 import colors from '../constants/Colors';
 
 const PressableButton = ({ title, onPress, isEnabled, styleOverride, textStyleOverride, children }) => {
@@ -15,7 +15,12 @@ const PressableButton = ({ title, onPress, isEnabled, styleOverride, textStyleOv
             disabled={!isEnabled} // Optionally disable the Pressable when isEnabled is false
             
         >
-            <Text style={[
+            <View style={styles.contentContainer}>
+                {title && <Text style={[styles.buttonText, textStyleOverride]}>{title}</Text>}
+                {children}
+            </View>
+            
+            {/* <Text style={[
                 styles.buttonText, 
                 !isEnabled && styles.disabledText,
                 textStyleOverride
@@ -23,7 +28,7 @@ const PressableButton = ({ title, onPress, isEnabled, styleOverride, textStyleOv
             {title}
             </Text>
         
-            {children}
+            {children} */}
         </Pressable>
     );
 };
