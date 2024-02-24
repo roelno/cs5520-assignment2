@@ -3,7 +3,7 @@ import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
-import CustomButton from '../components/CustomButton';
+import PressableButton from '../components/PressableComponent';
 import ActivityCard from '../components/ActivitiesList';
 
 const AllActivities = ({ navigation }) => {
@@ -12,7 +12,7 @@ const AllActivities = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <CustomButton
+                <PressableButton
                     onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities' })}
                     title="Add"
                     isEnabled={true}

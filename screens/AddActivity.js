@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../constants/Colors';
-import CustomButton from '../components/CustomButton';
+import PressableButton from '../components/PressableComponent';
 import { useActivities } from '../components/ActivityContent'
 
 const AddActivity = ({ navigation, route }) => {
@@ -135,12 +135,12 @@ const AddActivity = ({ navigation, route }) => {
             )}
 
             <View style={styles.buttonContainer}>
-                <CustomButton
+                <PressableButton
                     title='Cancel'
                     onPress={() => navigation.goBack()}
                     isEnabled={true}
                 />
-                <CustomButton
+                <PressableButton
                     title='Confirm'
                     onPress={() => {
                         const isValid = validateActivity();

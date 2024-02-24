@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useState} from 'react'
 import TextInputField from '../components/TextInput'
-import CustomButton from '../components/CustomButton'
+import PressableButton from '../components/PressableComponent'
 import colors from '../constants/Colors'
 
 const Start = ({route}) => {
@@ -73,12 +73,12 @@ const Start = ({route}) => {
             />
 
             <View style={styles.buttonContainer}>
-                <CustomButton
+                <PressableButton
                     title='Reset'
                     onPress={() => resetAllUserInput() }
                     isEnabled={true}
                 />
-                <CustomButton
+                <PressableButton
                     title='Confirm'
                     onPress={() => onConfirm()}
                     isEnabled={isStartEnable}

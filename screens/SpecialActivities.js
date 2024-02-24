@@ -2,7 +2,7 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
-import CustomButton from '../components/CustomButton';
+import PressableButton from '../components/PressableComponent';
 import { StatusBar } from 'expo-status-bar';
 import ActivityCard from '../components/ActivitiesList';
 
@@ -13,7 +13,7 @@ const SpecialActivities = ({navigation}) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <CustomButton
+                <PressableButton
                     onPress={() => navigation.navigate('AddActivity', { screenTitle: 'Special...' })}
                     title="Add"
                     isEnabled={true}
