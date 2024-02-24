@@ -4,7 +4,7 @@ import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import PressableButton from '../components/PressableComponent';
 import { StatusBar } from 'expo-status-bar';
-import ActivityCard from '../components/ActivitiesList';
+import ActivityList from '../components/ActivitiesList';
 import { Entypo } from '@expo/vector-icons';
 
 const SpecialActivities = ({navigation}) => {
@@ -33,7 +33,7 @@ const SpecialActivities = ({navigation}) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <ActivityCard activities={activities} onlySpecial={true} />
+            <ActivityList activities={activities} onlySpecial={true} />
         </View>
     )
 }

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
 import React from 'react'
 import colors from '../constants/Colors';
 
-const ActivityCard = ({ activities, onlySpecial = false }) => {
+const ActivityList = ({ activities, onlySpecial = false }) => {
     const renderActivity = ({ item }) => (
         <View style={styles.activityContainer}>
             <Text style={styles.activityType}>{item.type}</Text>
@@ -28,7 +28,7 @@ const ActivityCard = ({ activities, onlySpecial = false }) => {
     );
 };
 
-export default ActivityCard
+export default ActivityList
 
 const styles = StyleSheet.create({
     activityContainer: {
