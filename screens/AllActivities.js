@@ -33,13 +33,7 @@ const AllActivities = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <FlatList
-                data={activities}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <ActivityCard item={item} />
-                )}
-            />
+            <ActivityCard activities={activities} />
         </View>
     )
 }

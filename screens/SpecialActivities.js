@@ -9,7 +9,6 @@ import { Entypo } from '@expo/vector-icons';
 
 const SpecialActivities = ({navigation}) => {
     const { activities } = useActivities();
-    const specialActivities = activities.filter(activity => activity.isSpecial);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -34,13 +33,7 @@ const SpecialActivities = ({navigation}) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <FlatList
-                data={specialActivities}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <ActivityCard item={item} />
-                )}
-            />
+            <ActivityCard activities={activities} onlySpecial={true} />
         </View>
     )
 }
