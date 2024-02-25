@@ -1,6 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import {db} from "../firebase/firebaseConfig.js";
-import { collection, addDoc, updateDoc, doc, onSnapshot, query } from "firebase/firestore";
 import { addDocument, subscribeToCollection } from "../firebase/databaseService.js";
 
 

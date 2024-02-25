@@ -10,15 +10,15 @@ export const addDocument = async (collectionName, data) => {
     }
 }
 
-// export const updateDocument = async (collectionName, docId, data) => {
-//     try {
-//         const docRef = doc(db, collectionName, docId);
-//         await updateDoc(docRef, data);
-//         console.log("Document updated with ID: ", docRef.id);
-//     } catch (e) {
-//         console.error("Error updating document: ", e);
-//     }
-// }
+export const updateDocument = async (collectionName, docId, data) => {
+    try {
+        const docRef = doc(db, collectionName, docId);
+        await updateDoc(docRef, data);
+        console.log("Document updated with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error updating document: ", e);
+    }
+}
 
 export const subscribeToCollection = (collectionName, callback) => {
     const q = query(collection(db, collectionName));
