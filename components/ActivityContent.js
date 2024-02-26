@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { addDocument, subscribeToCollection, updateDoc, deleteDocument } from "../firebase/databaseService.js";
+import { addDocument, subscribeToCollection, updateDocument, deleteDocument } from "../firebase/databaseService.js";
 
 
 // Create the context
@@ -8,13 +8,14 @@ const ActivityContext = createContext();
 // Provider component
 export const ActivityProvider = ({ children }) => {
     const [activities, setActivities] = useState([
-        // { id: 1, type: 'Running', duration: 75, isSpecial: true },
+        { id: 1, type: 'Running', duration: 75, isSpecial: true },
     ]);
 
     useEffect(() => {
         // Subscribe to Firestore collection for real-time updates
         const unsubscribe = subscribeToCollection("activities", (newActivities) => {
             setActivities(newActivities);
+            console.log(newActivities);
         });
 
         // Cleanup subscription on unmount
@@ -33,7 +34,7 @@ export const ActivityProvider = ({ children }) => {
 
     // Function to update an activity
     const updateActivity = (activity) => {
-        updateDoc("activities", activity.id, activity);
+        updateDocument("activities", activity.id, activity);
     }
 
     // Function to delete an activity
