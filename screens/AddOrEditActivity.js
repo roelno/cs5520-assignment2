@@ -126,14 +126,23 @@ const AddOrEditActivity = ({ navigation, route }) => {
 
     // Add a trash icon to the navigation bar for deleting the activity
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <Pressable onPress={handleDeletePress}>
-                    <MaterialCommunityIcons name="delete" size={24} color="white" />
-                </Pressable>
-            ),
-        });
-    }, [navigation, handleDeletePress]);
+        if (activityId) {
+            navigation.setOptions({
+                headerRight: () => (
+                    <PressableButton
+                        onPress={ handleDeletePress }
+                        isEnabled={true}
+                        styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
+                    >
+                        <MaterialCommunityIcons name="delete" size={24} color="white" />
+                    </PressableButton>
+                ),
+            });
+        }
+        else {
+            navigation.setOptions({ headerRight: () => null }); // No icon when adding a new activity
+        }
+    }, [navigation, handleDeletePress, activityId]);
 
 
 
