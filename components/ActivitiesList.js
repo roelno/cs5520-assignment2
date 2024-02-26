@@ -41,21 +41,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         margin: 10,
-        padding: 15,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
         borderRadius: 10,
         backgroundColor: colors.primary,
         alignItems: 'center',
         marginVertical: 10,
     },
     activityType: {
+        flex: 1, // Take up as much space as possible without pushing other items out
         fontSize: 14,
         fontWeight: 'bold',
         color: colors.white,
     },
     activityInfo: {
-        padding: 10,
+        minWidth: 60, // Set a minimum width for the date and duration
+        alignItems: 'center', // Center the text within the activityInfo
+        padding: 8,
         backgroundColor: colors.white,
         borderRadius: 5,
+        marginHorizontal: 5,
     },
     infoText: {
         fontWeight: 'bold',
