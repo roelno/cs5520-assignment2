@@ -61,11 +61,25 @@ const AddOrEditActivity = ({ navigation, route }) => {
 
         try {
             if (activityId) {
-                updateActivity({ ...activityData, id: activityId });
-                Alert.alert("Success", "Activity updated successfully!");
+                Alert.alert(
+                    "Confirm Update",
+                    "Are you sure you want to update this activity?",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        { text: "OK", onPress: () => {
+                            updateActivity({ ...activityData, id: activityId });
+                            navigation.goBack();
+                        }}
+                    ]
+                );
+                
             } else {
                 addActivity(activityData);
-                Alert.alert("Success", "Activity added successfully!");
+                navigation.goBack();
             }
         } catch (error) {
             console.error(error);
@@ -222,14 +236,15 @@ const AddOrEditActivity = ({ navigation, route }) => {
                     title='Cancel'
                     onPress={() => navigation.goBack()}
                     isEnabled={true}
+                    styleOverride={{ width: 100, alignItems: 'center'}}
                 />
                 <PressableButton
-                    title='Confirm'
+                    title='Save'
                     onPress={() => {
                             handleConfirm();
-                            navigation.goBack();
                     }}
                     isEnabled={true}
+                    styleOverride={{ width: 100, alignItems: 'center'}}
                 />
             </View> 
 
