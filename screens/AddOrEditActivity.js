@@ -5,9 +5,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../constants/Colors';
 import PressableButton from '../components/PressableComponent';
 import { useActivities } from '../components/ActivityContent'
-import { useRoute } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { db } from '../firebase/databaseService';
+import Checkbox from 'expo-checkbox';
+
 
 const AddOrEditActivity = ({ navigation, route }) => {
     // States for activity fields
@@ -71,6 +71,9 @@ const AddOrEditActivity = ({ navigation, route }) => {
                             style: "cancel"
                         },
                         { text: "OK", onPress: () => {
+                            if (isChecked) {
+                                setIsSpecial(false); // Unspecial the activity
+                            }
                             updateActivity({ ...activityData, id: activityId });
                             navigation.goBack();
                         }}
@@ -158,6 +161,7 @@ const AddOrEditActivity = ({ navigation, route }) => {
         }
     }, [navigation, handleDeletePress, activityId]);
 
+    const [isChecked, setChecked] = useState(false);
 
 
     return (
@@ -230,6 +234,18 @@ const AddOrEditActivity = ({ navigation, route }) => {
                     onChange={onDateChange}
                 />
             )}
+            
+            { isSpecial && (
+                <View style={styles.checkboxContainer}>
+                    <Checkbox
+                        value={isChecked}
+                        onValueChange={(newValue) => setChecked(newValue)}
+                        color={isSpecial ? colors.primary : undefined}
+                    />
+                    <Text style={styles.checkboxLabel}>This item is marked as special. Select the checkbox if you want to unspecial it.</Text>
+                </View>
+                )
+            }
 
             <View style={styles.buttonContainer}>
                 <PressableButton
@@ -247,6 +263,7 @@ const AddOrEditActivity = ({ navigation, route }) => {
                     styleOverride={{ width: 100, alignItems: 'center'}}
                 />
             </View> 
+            
 
 
         </View>
@@ -280,5 +297,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: 10
-      },
+    },
+    checkboxContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 20,
+    },
+    checkboxLabel: {
+        marginLeft: 8,
+        fontSize: 16,
+    },
+    
 })
