@@ -52,10 +52,15 @@ const AddOrEditActivity = ({ navigation, route }) => {
             return;
         } 
 
-        let updatedIsSpecial = isSpecial;
-        if (activityId && isSpecial) {
-            updatedIsSpecial = !isChecked;
-        }
+        // Automatically determine isSpecial based on the activity type and duration
+        let autoIsSpecial = (activityType === 'Running' || activityType === 'Weights') && parseFloat(duration) > 60;
+          
+        // Update isSpecial based on auto calculation or user override through checkbox
+        // For new activities or if not previously special, use autoIsSpecial
+        // For existing special activities, allow checkbox to override
+        let updatedIsSpecial = (activityId && isSpecial) ? (!isChecked && autoIsSpecial) : autoIsSpecial;
+
+        console.log('updatedIsSpecial', updatedIsSpecial);
 
         const activityData = {
             type: activityType,
@@ -72,7 +77,6 @@ const AddOrEditActivity = ({ navigation, route }) => {
                     [
                         {
                             text: "Cancel",
-                            onPress: () => console.log("Cancel Pressed"),
                             style: "cancel"
                         },
                         { text: "OK", onPress: () => {

@@ -15,7 +15,6 @@ export const ActivityProvider = ({ children }) => {
         // Subscribe to Firestore collection for real-time updates
         const unsubscribe = subscribeToCollection("activities", (newActivities) => {
             setActivities(newActivities);
-            console.log(newActivities);
         });
 
         // Cleanup subscription on unmount
