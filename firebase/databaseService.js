@@ -1,4 +1,4 @@
-import { collection, addDoc, updateDoc, doc, onSnapshot, query } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, onSnapshot, query, deleteDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 
 export const addDocument = async (collectionName, data) => {
@@ -40,14 +40,14 @@ export const subscribeToCollection = (collectionName, callback) => {
 //     return unsubscribe;
 // }
 
-// export const deleteDocument = async (collectionName, docId) => {
-//     try {
-//         await deleteDoc(doc(db, collectionName, docId));
-//         console.log("Document deleted with ID: ", docId);
-//     } catch (e) {
-//         console.error("Error deleting document: ", e);
-//     }
-// }
+export const deleteDocument = async (collectionName, docId) => {
+    try {
+        await deleteDoc(doc(db, collectionName, docId));
+        console.log("Document deleted with ID: ", docId);
+    } catch (e) {
+        console.error("Error deleting document: ", e);
+    }
+}
 
 // export const deleteCollection = async (collectionName) => {
 //     try {

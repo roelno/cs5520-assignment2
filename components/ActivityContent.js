@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { addDocument, subscribeToCollection } from "../firebase/databaseService.js";
+import { addDocument, subscribeToCollection, updateDoc, deleteDocument } from "../firebase/databaseService.js";
 
 
 // Create the context
@@ -30,8 +30,24 @@ export const ActivityProvider = ({ children }) => {
         addDocument("activities", newActivityData);
     };
 
+
+    // Function to update an activity
+    const updateActivity = (activity) => {
+        updateDoc("activities", activity.id, activity);
+    }
+
+    // Function to delete an activity
+    const deleteActivity = async (activityId) => {
+        try {
+            await deleteDocument("activities", activityId);
+        } catch (e) {
+            console.error("Error deleting document: ", e);
+        }
+    }
+
+ 
     return (
-        <ActivityContext.Provider value={{ activities, addActivity }}>
+        <ActivityContext.Provider value={{ activities, addActivity, deleteActivity, updateActivity }}>
             {children}
         </ActivityContext.Provider>
     );

@@ -14,7 +14,7 @@ const AllActivities = ({ navigation }) => {
         navigation.setOptions({
             headerRight: () => (
                 <PressableButton
-                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities...' })}
+                    onPress={() => navigation.navigate('AddOrEditActivity', { screenTitle: 'All Activities...' })}
                     isEnabled={true}
                     styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
                     textStyleOverride={{
@@ -33,7 +33,7 @@ const AllActivities = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <ActivityList activities={activities} />
+            <ActivityList navigation={navigation} activities={activities} />
         </View>
     )
 }

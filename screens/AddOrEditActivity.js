@@ -1,31 +1,95 @@
-import { StyleSheet, Text, View, TextInput, Alert} from 'react-native'
-import React, {useEffect, useState} from 'react'
+import { StyleSheet, Text, View, TextInput, Alert, Pressable} from 'react-native'
+import React, {useEffect, useState, useLayoutEffect} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../constants/Colors';
 import PressableButton from '../components/PressableComponent';
 import { useActivities } from '../components/ActivityContent'
+import { useRoute } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { db } from '../firebase/databaseService';
 
-const AddActivity = ({ navigation, route }) => {
-    const [activityType, setActivityType] = useState(null);
+const AddOrEditActivity = ({ navigation, route }) => {
+    // States for activity fields
+    const [activityType, setActivityType] = useState('');
     const [duration, setDuration] = useState('');
-    const [date, setDate] = useState(null);
+    const [date, setDate] = useState(new Date() );
+    const [isSpecial, setIsSpecial] = useState(false);
+    const [activityId, setActivityId] = useState(null);
+
+    useEffect(() => {
+        const activity = route.params?.activity; // Get the activity from route params
+        const previousScreenTitle = 'Back';
+
+        if (activity) {
+            // If there's an activity object, then we are editing
+            setActivityType(activity.type);
+            setDuration(activity.duration.toString());
+            setDate(new Date(activity.date));
+            setIsSpecial(activity.isSpecial);
+            setActivityId(activity.id); // Set the activityId for further operations
+            navigation.setOptions({ title: 'Edit Activity', headerBackTitle: previousScreenTitle }); // Set the screen title to 'Edit'
+        } else {
+            // If no activity object, then we are adding a new one
+            navigation.setOptions({ title: 'Add an Activity', headerBackTitle: previousScreenTitle }); // Set the screen title to 'Add'
+        }
+    }, [route.params, navigation]);
+
 
     // State for DropDownPicker and DateTimePicker visibility
     const [open, setOpen] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     
-    // Access addActivity function from the context
-    const {addActivity} = useActivities();
+    // Access the activity context
+    const { addActivity, updateActivity, deleteActivity } = useActivities();
 
-    // // Set the navigation options
-    useEffect(() => {
-        const previousScreenTitle = route.params?.screenTitle || 'Activities';
-        navigation.setOptions({
-            title: `Add An Activity`,
-            headerBackTitle: previousScreenTitle,  // Used in iOS to set the back button title
-        });
-    }, [navigation, route.params?.screenTitle]);
+
+    // Handler for confirming add/edit
+    const handleConfirm = async () => {
+        const isValid = validateActivity();
+        if (!isValid) {
+            Alert.alert("Invalid Input", "Please ensure all fields are filled correctly");
+            return;
+        } 
+
+        const activityData = {
+            type: activityType,
+            duration: parseFloat(duration),
+            date: date.toISOString(),
+            isSpecial, // Update the isSpecial status based on the checkbox
+        };
+
+        try {
+            if (activityId) {
+                updateActivity({ ...activityData, id: activityId });
+                Alert.alert("Success", "Activity updated successfully!");
+            } else {
+                addActivity(activityData);
+                Alert.alert("Success", "Activity added successfully!");
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Error", "There was a problem saving the activity.");
+        }
+    };
+
+    const handleDeletePress = async () => {
+        if (activityId) {
+            Alert.alert(
+                "Confirm Delete",
+                "Are you sure you want to delete this activity?",
+                [
+                    { text: "Cancel" },
+                    {
+                        text: "Yes", onPress: () => {
+                            deleteActivity(activityId);
+                            navigation.goBack();
+                        }
+                    },
+                ]
+            );
+        }
+    };
 
 
     // Handler for when the date is selected or changed
@@ -57,9 +121,19 @@ const AddActivity = ({ navigation, route }) => {
             duration: durationNumber,
             date: date.toISOString(), // Store date as ISO string format
         };
-        addActivity(newActivity);
         return true;
     }
+
+    // Add a trash icon to the navigation bar for deleting the activity
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Pressable onPress={handleDeletePress}>
+                    <MaterialCommunityIcons name="delete" size={24} color="white" />
+                </Pressable>
+            ),
+        });
+    }, [navigation, handleDeletePress]);
 
 
 
@@ -143,28 +217,21 @@ const AddActivity = ({ navigation, route }) => {
                 <PressableButton
                     title='Confirm'
                     onPress={() => {
-                        const isValid = validateActivity();
-                        if (!isValid) {
-                            Alert.alert(
-                                "Invalid Input", // Title
-                                "Please ensure all fields are filled correctly", // Message
-                                [
-                                    { text: "OK" } // Array of buttons
-                                ]
-                            );
-                        } else {
+                            handleConfirm();
                             navigation.goBack();
-                        }
                     }}
                     isEnabled={true}
                 />
             </View> 
 
+
         </View>
+
+        
     )
 }
 
-export default AddActivity
+export default AddOrEditActivity
 
 const styles = StyleSheet.create({
     container: {

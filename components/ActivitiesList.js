@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, Image, FlatList, Pressable } from 'react-native
 import React from 'react'
 import colors from '../constants/Colors';
 
-const ActivityList = ({ activities, onlySpecial = false }) => {
+const ActivityList = ({ navigation, activities, onlySpecial = false }) => {
     const renderActivity = ({ item }) => (
         <Pressable 
-            onPress={() => console.log('Pressed', item.id)} 
+            onPress={() => navigation.navigate('AddOrEditActivity', {activity: item }) } 
             style={({ pressed }) => [styles.activityContainer, pressed && styles.pressed]}
             >
                 
