@@ -305,11 +305,14 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     checkboxContainer: {
-        flexDirection: "row",
+        flexDirection: "row-reverse",
         alignItems: "center",
         marginBottom: 20,
+        marginTop: 60,
+        marginLeft: 10,
     },
     checkboxLabel: {
+        flex: 1,
         marginLeft: 8,
         fontSize: 16,
     },
