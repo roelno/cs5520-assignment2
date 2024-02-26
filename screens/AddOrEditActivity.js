@@ -52,11 +52,16 @@ const AddOrEditActivity = ({ navigation, route }) => {
             return;
         } 
 
+        let updatedIsSpecial = isSpecial;
+        if (activityId && isSpecial) {
+            updatedIsSpecial = !isChecked;
+        }
+
         const activityData = {
             type: activityType,
             duration: parseFloat(duration),
             date: date.toISOString(),
-            isSpecial, // Update the isSpecial status based on the checkbox
+            isSpecial: updatedIsSpecial,
         };
 
         try {
@@ -71,9 +76,6 @@ const AddOrEditActivity = ({ navigation, route }) => {
                             style: "cancel"
                         },
                         { text: "OK", onPress: () => {
-                            if (isChecked) {
-                                setIsSpecial(false); // Unspecial the activity
-                            }
                             updateActivity({ ...activityData, id: activityId });
                             navigation.goBack();
                         }}
