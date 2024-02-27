@@ -8,7 +8,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Start from './screens/Start';
 import AllActivities from './screens/AllActivities';
 import SpecialActivities from './screens/SpecialActivities';
-import AddActivity from './screens/AddActivity';
+import AddOrEditActivity from './screens/AddOrEditActivity';
 import { ActivityProvider } from './components/ActivityContent';
 import colors from './constants/Colors';
 
@@ -69,8 +69,8 @@ export default function App() {
                                 component={Activities} 
                                 options={{headerShown: false}}/>
                             <Stack.Screen
-                                name="AddActivity"
-                                component={AddActivity}
+                                name="AddOrEditActivity"
+                                component={AddOrEditActivity}
                                 options={({ route }) => ({
                                     title: route.params?.screenTitle || 'Add An Activity',
                                     headerStyle: { backgroundColor: colors.primary },

@@ -3,8 +3,9 @@ import React, {useLayoutEffect} from 'react'
 import { useActivities } from '../components/ActivityContent'
 import colors from '../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
-import CustomButton from '../components/CustomButton';
-import ActivityCard from '../components/ActivitiesList';
+import PressableButton from '../components/PressableComponent';
+import ActivityList from '../components/ActivitiesList';
+import { Entypo } from '@expo/vector-icons';
 
 const AllActivities = ({ navigation }) => {
     const { activities } = useActivities();
@@ -12,17 +13,14 @@ const AllActivities = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <CustomButton
-                    onPress={() => navigation.navigate('AddActivity', { screenTitle: 'All Activities' })}
-                    title="Add"
+                <PressableButton
+                    onPress={() => navigation.navigate('AddOrEditActivity', { screenTitle: 'All Activities...' })}
                     isEnabled={true}
                     styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
-                    textStyleOverride={{
-                        color: colors.secondary,
-                        fontSize: 18, 
-                        fontWeight: 'bold', 
-                    }}
-                />
+                >
+                    <Entypo name="plus" size={24} color="white" />
+                </PressableButton>
+
             ),
         });
     }, [navigation]);
@@ -30,13 +28,7 @@ const AllActivities = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <FlatList
-                data={activities}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <ActivityCard item={item} />
-                )}
-            />
+            <ActivityList navigation={navigation} activities={activities} />
         </View>
     )
 }
