@@ -17,11 +17,6 @@ const SpecialActivities = ({navigation}) => {
                     onPress={() => navigation.navigate('AddOrEditActivity', { screenTitle: 'Special...' })}
                     isEnabled={true}
                     styleOverride={{ marginRight: 10, backgroundColor: colors.primary, borderRadius: 5, elevation: 0, marginTop: 0 }}
-                    textStyleOverride={{
-                        color: colors.secondary,
-                        fontSize: 18, 
-                        fontWeight: 'bold', 
-                    }}
                 >
                     <Entypo name="plus" size={24} color="white" />
                 </PressableButton>

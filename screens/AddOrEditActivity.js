@@ -18,7 +18,9 @@ const AddOrEditActivity = ({ navigation, route }) => {
     const [activityId, setActivityId] = useState(null);
 
     useEffect(() => {
-        const activity = route.params?.activity; // Get the activity from route params
+        
+        const activity = route.params?.activity; //  if editing, the activity object is passed as a parameter
+
         const previousScreenTitle = 'Back';
 
         if (activity) {

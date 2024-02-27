@@ -8,7 +8,7 @@ const ActivityContext = createContext();
 // Provider component
 export const ActivityProvider = ({ children }) => {
     const [activities, setActivities] = useState([
-        { id: 1, type: 'Running', duration: 75, isSpecial: true },
+        // { id: 1, type: 'Running', duration: 75, isSpecial: true },
     ]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export const ActivityProvider = ({ children }) => {
         });
 
         // Cleanup subscription on unmount
-        return () => unsubscribe();
+        return () => unsubscribe(); 
     }, []);
 
 

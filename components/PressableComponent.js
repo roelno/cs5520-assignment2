@@ -20,15 +20,6 @@ const PressableButton = ({ title, onPress, isEnabled, styleOverride, textStyleOv
                 {children}
             </View>
             
-            {/* <Text style={[
-                styles.buttonText, 
-                !isEnabled && styles.disabledText,
-                textStyleOverride
-            ]}>
-            {title}
-            </Text>
-        
-            {children} */}
         </Pressable>
     );
 };
